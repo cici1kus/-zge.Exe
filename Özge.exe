@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Özge.exe</title>
+
+<style>
+body{
+    margin:0;
+    background:#000;
+    color:#00ff66;
+    font-family:Consolas,monospace;
+    overflow:hidden;
+}
+
+#terminal{
+    padding:20px;
+    white-space:pre-line;
+    font-size:18px;
+}
+
+.profile{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    opacity:0;
+}
+
+.face{
+    font-size:140px;
+    color:#00ff66;
+    text-shadow:
+    0 0 10px #00ff66,
+    0 0 20px #00ff66,
+    0 0 40px #00ff66;
+    animation:pulse 2s infinite;
+}
+
+.name{
+    font-size:40px;
+    margin-top:15px;
+    color:white;
+    text-shadow:0 0 20px #00ff66;
+}
+
+.msg{
+    margin-top:20px;
+    font-size:22px;
+    color:#ddd;
+}
+
+.cursor{
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{opacity:0;}
+}
+
+@keyframes pulse{
+    50%{transform:scale(1.05);}
+}
+</style>
+</head>
+<body>
+
+<div id="terminal"></div>
+
+<script>
+
+const lines = [
+"> booting system...",
+"> loading developer profile...",
+"> searching database...",
+"> profile found",
+"",
+"> name: Özge",
+"> role: Future Assembly Master",
+"> stress level: 97%",
+"> determination: 100%",
+"",
+"> generating message..."
+];
+
+let i = 0;
+const term = document.getElementById("terminal");
+
+function type(){
+    if(i < lines.length){
+        term.innerHTML += lines[i] + "\n";
+        i++;
+        setTimeout(type,650);
+    }else{
+        setTimeout(showProfile,1200);
+    }
+}
+
+function showProfile(){
+
+document.body.innerHTML += `
+<div class="profile" id="p">
+
+<div class="face">☺</div>
+
+<div class="name">
+Özge.exe
+</div>
+
+<div class="msg" id="msg"></div>
+
+</div>
+`;
+
+document.getElementById("p").style.opacity = "1";
+
+const text = "Bugün çok çalıştın, dinlen ^^ Sen yaparsınn ✨";
+let j=0;
+
+function writeMsg(){
+    if(j < text.length){
+        document.getElementById("msg").innerHTML += text[j];
+        j++;
+        setTimeout(writeMsg,70);
+    }
+}
+
+writeMsg();
+}
+
+type();
+
+</script>
+
+</body>
+</html>
